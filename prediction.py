@@ -1,21 +1,49 @@
 import streamlit as st
-#import pandas as pd
-#import joblib
+import pandas as pd
+import joblib
+from sklearn.ensemble import RandomForestClassifier
 
 #Load in our fitted models:
-#RAmodel = joblib.load(RAmodel, "RAmodel.joblib")
-#LPmodel = joblib.load(LPmodel, "LPmodel.joblib")
-#MFmodel = joblib.load(MFmodel, "MFmodel.joblib")
+RAmodel = joblib.load("RAmodel.joblib")
+LPmodel = joblib.load("LPmodel.joblib")
+MFmodel = joblib.load("MFmodel.joblib")
 
 #Now take the user's input and produce a prediction:
 def app():
     
-    st.title('Art Preference Prediction')
+    st.title("Art Preference Prediction")
     
-    st.markdown('Enter in values into the two fields below. This app will provide a prediction for what type of artwork a person with those characteristics would like.')
+    st.markdown('Enter values into the two fields below. This app will provide a prediction for what type of artwork a person with those characteristics would like.')
     
-#    st.number_input('Age:',0,123)
-#    st.text_input
+    age = st.number_input('Age:',min_value=1,max_value=122)
+    major = st.selectbox('College Major:',options=['psychology','art','english','computer science','biology','business',
+                                           'engineering','history','medical','economics','law','education','math',
+                                           'physics','political science','nursing','architecture','philosophy',
+                                           'communication','graphic design'])
+
+    text_input = pd.DataFrame({'age':[age],'major':[major]})
+    
+    RAcat = RAmodel.predict(text_input)[0]
+    LPcat = LPmodel.predict(text_input)[0]
+    MFcat = MFmodel.predict(text_input)[0]
+    
+
+    
+    st.markdown('__We recommend artwork that is:__')
+    st.write(RAcat)  
+    st.write(LPcat)      
+    st.write(MFcat)  
+    
+    st.markdown('\n\n\n\n\n\n\n')
+    
+    st.markdown('__What do these categories mean?__')
+
+    st.markdown('**Realistic**: artwork which tries to render realistic scenes.')    
+    st.markdown('**Abstract**: artwork which does not try to look realistic.')     
+    st.markdown('**Linear**: artwork with clean lines, striving towards photorealism.')
+    st.markdown('**Painterly**: artwork with visible brush strokes.')
+    st.markdown('**Masculine**: artwork with content that is stereotypically of interest to males (such as fighting, machines, architecture, etc.).')
+    st.markdown('**Feminine**: artwork with content that stereotypically appeals to females (such as women in dresses).')
     
 if __name__ == '__main__':
     app()
