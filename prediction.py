@@ -78,5 +78,5 @@ def app():
     st.markdown('**Masculine**: artwork with content that is stereotypically of interest to males (such as fighting, machines, architecture, etc.).')
     st.markdown('**Feminine**: artwork with content that stereotypically appeals to females (such as women in dresses).')
     
-if __name__ == '__main__':
-    app()
+#if __name__ == '__main__':
+#    app()
