@@ -6,7 +6,7 @@ st.title("Quinn Tracy")
 st.markdown('**LinkedIn:**')
 st.markdown('https://www.linkedin.com/in/quinn-tracy-981138b6')
 st.markdown('**E-mail:**')
-st.markdown('quinn.brinton.tracy@mg.thedataincubator.com')
+st.markdown('quinnbtracy@gmail.com')
 st.markdown('**GitHub:**')
 st.markdown('https://github.com/qbtracy/')
 
